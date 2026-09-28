@@ -1,0 +1,28 @@
+.project-name { font-size: 48px; letter-spacing: -1.8px; line-height: 1.18; margin-bottom: 19px; }
+.paper-title { font-size: 30px; }
+.method-note { margin-top: 26px; }
+.secondary-heading { margin-top: 36px; gap: 18px; align-items: flex-start; }
+.secondary-heading > span { flex-shrink: 0; }
+.group th { background: #f6f7f4; font-size: 11px; color: var(--muted); font-weight: 600; }
+tbody:not(:last-child) tr:last-child td,
+tbody:not(:last-child) tr:last-child th { border-bottom: 1px solid var(--line); }
+.ablation-section, .efficiency, .examples { padding-top: 0; }
+.case blockquote { min-height: 0; margin-bottom: 22px; font-size: 15px; }
+.case .sample { min-height: 68px; }
+.answer { display: flex; justify-content: space-between; gap: 16px; border-top: 1px solid var(--line); padding: 12px 0 0; margin-top: 12px; font-size: 13px; }
+.answer span { color: var(--muted); font-size: 11px; }
+.answer strong { font-weight: 550; color: var(--green); text-align: right; }
+@media (max-width: 760px) {
+  .project-name { font-size: 38px; letter-spacing: -1px; }
+  .paper-title { font-size: 24px; }
+  .secondary-heading { flex-direction: column; gap: 5px; }
+  .case-top { align-items: flex-start; }
+  .case-top > span { white-space: nowrap; }
+  footer { flex-wrap: wrap; }
+}
+@media (max-width: 520px) {
+  .project-name { font-size: 36px; }
+  .paper-title { font-size: 22px; }
+  .case .sample { min-height: 0; }
+  footer > span { flex-basis: 100%; }
+}
