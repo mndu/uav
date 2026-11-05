@@ -35,7 +35,7 @@
 
     <section class="intro section" id="overview" aria-labelledby="overview-title">
       <p class="eyebrow">A SHARED LANGUAGE FOR MODEL ACTIVATIONS</p>
-      <h2 id="overview-title">Different models.<br class="desktop-break"> One reusable verbalizer.</h2>
+      <h2 id="overview-title">Overview</h2>
       <p class="lead">UAV turns hidden activations into natural-language answers. Donor- and layer-specific adapters translate representations into soft tokens that a shared decoder can read.</p>
       <figure class="framework"><a href="assets/framework.webp" aria-label="View the full-size UAV framework"><img src="assets/framework.webp" width="1816" height="820" alt="UAV framework: a donor model's hidden activation is mapped through an MLP or Q-Former adapter to soft tokens for a verbalizer. Stage 1 trains the adapter to reconstruct text; Stage 2 trains the adapter and decoder-side LoRA for question answering."></a><figcaption><strong>The UAV framework.</strong> Activation-to-text alignment teaches the adapter to translate hidden states. Instruction-following alignment trains the verbalizer to answer questions about the information they encode.</figcaption></figure>
     </section>
@@ -46,7 +46,7 @@
     </div></section>
 
     <section class="section" id="method" aria-labelledby="method-title">
-      <p class="eyebrow">THE METHOD</p><h2 id="method-title">Align activations. Learn to answer. Transfer.</h2>
+      <p class="eyebrow">THE METHOD</p><h2 id="method-title">UAV Method</h2>
       <p class="section-intro">The verbalizer receives activation-derived soft tokens and a question. The source text is withheld from the verbalizer at evaluation time.</p>
       <div class="steps">
         <article><span class="step-number">01</span><h3>Activation-to-text alignment</h3><p>Train an MLP or Q-Former adapter to reconstruct the input prefix from a donor activation. The decoder stays frozen while the adapter learns to produce decoder-readable soft tokens.</p><span class="step-tag">Stage 1 · Adapter only</span></article>
@@ -57,7 +57,7 @@
     </section>
 
     <section class="section results" id="results" aria-labelledby="results-title">
-      <p class="eyebrow">CROSS-MODEL VERBALIZATION</p><h2 id="results-title">A shared decoder across model families.</h2>
+      <p class="eyebrow">CROSS-MODEL VERBALIZATION</p><h2 id="results-title">Cross-Model Results</h2>
       <p class="section-intro">Qwen3-4B-Instruct-2507 serves as the decoder for Llama, Gemma, and Yi donor models.</p>
       <div class="highlights">
         <div><strong>4B</strong><span>Shared decoder</span><small>Qwen3-4B-Instruct-2507</small></div>
@@ -91,13 +91,13 @@
     </section>
 
     <section class="section ablation-section" aria-labelledby="ablation-title">
-      <p class="eyebrow">WHAT EACH COMPONENT CONTRIBUTES</p><h2 id="ablation-title">The adapter supplies activation-grounded evidence.</h2>
+      <p class="eyebrow">WHAT EACH COMPONENT CONTRIBUTES</p><h2 id="ablation-title">Component Ablation</h2>
       <p class="section-intro">Decoder-side LoRA improves task behavior. Recovering input-specific facts and meaning also depends on the trained activation adapter.</p>
       <figure class="framework"><a href="assets/ablation.webp" aria-label="View the full-size adapter and LoRA ablation"><img src="assets/ablation.webp" width="1812" height="412" loading="lazy" alt="Figure 3 compares Token F1, ROUGE-L, and BERTScore across six ablation variants. Full UAV improves fact and gist readout over decoder-side LoRA alone."></a><figcaption><strong>Component ablation (Figure 3).</strong> Fine-tuned LoRA alone achieves a fact-retrieval BERTScore of 0.196; full UAV reaches 0.402. These are ablation-specific values, separate from the main comparison settings.</figcaption></figure>
     </section>
 
     <section class="section efficiency" aria-labelledby="efficiency-title">
-      <p class="eyebrow">TRAINING WITH CACHED ACTIVATIONS</p><h2 id="efficiency-title">A smaller decoder lowers training cost.</h2>
+      <p class="eyebrow">TRAINING WITH CACHED ACTIVATIONS</p><h2 id="efficiency-title">Training Efficiency</h2>
       <p class="section-intro">Caching donor activations allows verbalizer training without keeping the donor model in GPU memory.</p>
       <div class="table-scroll" tabindex="0" role="region" aria-label="Training efficiency comparison"><table><caption class="sr-only">Training cost per epoch from Appendix D.1 and Table 12.</caption><thead><tr><th scope="col">Configuration</th><th scope="col">Stage 1 GPU-hours ↓</th><th scope="col">Stage 2 GPU-hours ↓</th><th scope="col">Validation loss ↓</th></tr></thead><tbody>
         <tr><th scope="row">12B self-decoding</th><td>7.1</td><td>26.5</td><td>1.6004</td></tr>
@@ -107,7 +107,7 @@
     </section>
 
     <section class="section examples" aria-labelledby="examples-title">
-      <p class="eyebrow">ACTIVATIONS IN NATURAL LANGUAGE</p><h2 id="examples-title">What can the verbalizer recover?</h2>
+      <p class="eyebrow">ACTIVATIONS IN NATURAL LANGUAGE</p><h2 id="examples-title">Qualitative Examples</h2>
       <p class="section-intro">Selected fact-retrieval examples from Table 19. Source excerpts are shown for context; the verbalizer receives the question and activation-derived tokens.</p>
       <div class="case-grid">
         <article class="case improved"><div class="case-top"><h3>Successful factual readout</h3><span>ROUGE-L 1.000</span></div><p class="small-label">SOURCE EXCERPT</p><p class="sample">Westfield Corporation was founded with the spin-off of the Westfield Group in 2014…</p><p class="small-label">QUESTION</p><blockquote>What was the name of the group this entity split from?</blockquote><div class="answer"><span>Reference</span><strong>Westfield Group</strong></div><div class="answer"><span>UAV</span><strong>Westfield Group</strong></div></article>
