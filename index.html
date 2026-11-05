@@ -3,125 +3,70 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Universal Activation Verbalizer (UAV): a shared-decoder framework for explaining activations across language model families and scales. EMNLP 2026.">
-  <meta name="theme-color" content="#275c50">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Universal Activation Verbalizer | EMNLP 2026">
-  <meta property="og:description" content="A Unified Framework for Cross-Model Activation Explanation">
-  <meta property="og:url" content="https://mndu.github.io/uav/">
-  <meta property="og:image" content="https://mndu.github.io/uav/assets/framework.webp">
-  <link rel="canonical" href="https://mndu.github.io/uav/">
-  <title>Universal Activation Verbalizer · EMNLP 2026</title>
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <meta name="description" content="Universal Activation Verbalizer: A Unified Framework for Cross-Model Activation Explanation. EMNLP 2026 project page.">
+  <title>Universal Activation Verbalizer</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="paper.css">
-  <script src="script.js" defer></script>
 </head>
 <body>
-  <a class="skip-link" href="#overview">Skip to content</a>
   <main>
-    <header class="hero">
-      <h1><span class="project-name">Universal Activation Verbalizer</span><span class="paper-title">A Unified Framework for<br class="desktop-break"> Cross-Model Activation Explanation</span></h1>
-      <div class="authors"><span>Haiyan Zhao<sup>1</sup></span><span>Zirui He<sup>1</sup></span><span>Guanchu Wang<sup>2</sup></span><span>Ali Payani<sup>3</sup></span><span>Yingcong Li<sup>1</sup></span><span>Mengnan Du<sup>4,†</sup></span></div>
-      <div class="affiliations"><span><sup>1</sup> New Jersey Institute of Technology</span><span><sup>2</sup> University of North Carolina at Charlotte</span><span><sup>3</sup> Cisco Research</span><span><sup>4</sup> The Chinese University of Hong Kong, Shenzhen</span></div>
-      <p class="corresponding">† Corresponding author</p>
-      <div class="resources">
-        <a class="button primary" href="1341_Universal_Activation_Verb.pdf"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8zM14 3v6h5M9 13h6M9 17h6"/></svg> Read the paper</a>
-        <a class="button" href="https://github.com/hy-zhao23/ActExp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 7-5 5 5 5m8-10 5 5-5 5m-3-12-2 20"/></svg> Code</a>
-        <a class="button" href="https://arxiv.org/abs/2605.25903"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6m0-6L10 14M10 5H5v14h14v-5"/></svg> arXiv</a>
-        <a class="button" href="#citation"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 7H4v6h6V7ZM20 7h-6v6h6V7ZM10 13c0 4-2 5-4 5m14-5c0 4-2 5-4 5"/></svg> BibTeX</a>
-      </div>
-    </header>
+    <section class="sheet home">
+      <h1>Universal Activation Verbalizer: A Unified Framework for<br class="wide-only"> Cross-Model Activation Explanation</h1>
+      <p class="authors">Haiyan Zhao<sup>1</sup>, Zirui He<sup>1</sup>, Guanchu Wang<sup>2</sup>, Ali Payani<sup>3</sup>, Yingcong Li<sup>1</sup>, Mengnan Du<sup>4,†</sup></p>
+      <p class="institutions"><sup>1</sup> New Jersey Institute of Technology, <sup>2</sup> University of North Carolina at Charlotte,<br class="wide-only"> <sup>3</sup> Cisco Research, <sup>4</sup> The Chinese University of Hong Kong, Shenzhen</p>
+      <p class="author-note">† Corresponding author</p>
+      <p class="links"><a href="1341_Universal_Activation_Verb.pdf">[Paper]</a>&nbsp; <a href="https://github.com/hy-zhao23/ActExp">[Code]</a>&nbsp; <a href="https://arxiv.org/abs/2605.25903">[arXiv]</a></p>
+      <figure class="framework"><a href="assets/framework.webp" aria-label="Open the full-size framework figure"><img src="assets/framework.webp" width="1816" height="820" alt="UAV framework: a donor model's activation is mapped by an adapter to soft tokens for a shared decoder. The adapter is trained for text reconstruction and then for question answering with decoder-side LoRA."></a><figcaption>Figure 1. The UAV framework for cross-model activation verbalization. Figure from the paper. Select the image to view it full size.</figcaption></figure>
+    </section>
 
-    <section class="intro section" id="overview" aria-labelledby="overview-title">
-      <p class="eyebrow">A SHARED LANGUAGE FOR MODEL ACTIVATIONS</p>
+    <section class="sheet" aria-labelledby="overview-title">
       <h2 id="overview-title">Overview</h2>
-      <p class="lead">UAV turns hidden activations into natural-language answers. Donor- and layer-specific adapters translate representations into soft tokens that a shared decoder can read.</p>
-      <figure class="framework"><a href="assets/framework.webp" aria-label="View the full-size UAV framework"><img src="assets/framework.webp" width="1816" height="820" alt="UAV framework: a donor model's hidden activation is mapped through an MLP or Q-Former adapter to soft tokens for a verbalizer. Stage 1 trains the adapter to reconstruct text; Stage 2 trains the adapter and decoder-side LoRA for question answering."></a><figcaption><strong>The UAV framework.</strong> Activation-to-text alignment teaches the adapter to translate hidden states. Instruction-following alignment trains the verbalizer to answer questions about the information they encode.</figcaption></figure>
-    </section>
-
-    <section class="abstract-band" aria-labelledby="abstract-title"><div class="section narrow">
-      <h2 id="abstract-title">Abstract</h2>
-      <p>Activation verbalization explains hidden representations in natural language, but existing methods are mostly limited to self-explanation, where each model explains only its own activations. We introduce <strong>Universal Activation Verbalizer (UAV)</strong>, a shared-decoder framework that uses donor- and layer-specific adapters to explain activations from heterogeneous donor models. UAV learns a lightweight adapter that converts donor activations into soft tokens in decoder’s embedding space, and further supports adapter-only transfer by reusing a frozen decoder-side LoRA while training only a new adapter for another donor. Across classification, fact retrieval, and gist summarization, UAV remains competitive with strong self-explanation baselines while enabling cross-model verbalization across model families and scales. Ablations show that decoder-side tuning mainly improves task behavior, whereas the adapter provides the activation-grounded factual and semantic evidence. Code and data are available at our <a href="https://github.com/hy-zhao23/ActExp">GitHub repository</a>.</p>
-    </div></section>
-
-    <section class="section" id="method" aria-labelledby="method-title">
-      <p class="eyebrow">THE METHOD</p><h2 id="method-title">UAV Method</h2>
-      <p class="section-intro">The verbalizer receives activation-derived soft tokens and a question. The source text is withheld from the verbalizer at evaluation time.</p>
-      <div class="steps">
-        <article><span class="step-number">01</span><h3>Activation-to-text alignment</h3><p>Train an MLP or Q-Former adapter to reconstruct the input prefix from a donor activation. The decoder stays frozen while the adapter learns to produce decoder-readable soft tokens.</p><span class="step-tag">Stage 1 · Adapter only</span></article>
-        <article><span class="step-number">02</span><h3>Instruction-following alignment</h3><p>Train the adapter together with decoder-side LoRA on explanation-oriented questions. The decoder backbone remains frozen as the verbalizer learns classification, factual retrieval, and gist tasks.</p><span class="step-tag">Stage 2 · Adapter + LoRA</span></article>
-        <article><span class="step-number">03</span><h3>Adapter-only transfer</h3><p>For another donor, reuse the adapted decoder and freeze its LoRA. Train a new donor-specific adapter to connect the new activation space to the existing verbalizer.</p><span class="step-tag">Reuse the adapted decoder</span></article>
+      <div class="body-copy">
+        <p>Activation verbalization asks what information a language model’s hidden state contains and expresses it in natural language. Existing methods mainly explain a model’s own activations. Universal Activation Verbalizer (UAV) uses a shared decoder with donor- and layer-specific adapters, allowing one decoder to explain activations from different model families and sizes.</p>
+        <p>First, an adapter learns to turn a donor activation into decoder-readable soft tokens by reconstructing text. Next, instruction-following training teaches the verbalizer to answer questions about the activation, using decoder-side LoRA while the decoder backbone remains frozen. For a new donor, the learned decoder-side LoRA can be reused while a new adapter is trained. UAV evaluates classification, fact retrieval, and gist summarization; the source text is withheld from the verbalizer at evaluation time.</p>
       </div>
-      <p class="table-note method-note">“Universal” refers to decoder reuse across donors. New donors require their own trained adapters; the framework reads out recoverable information and does not establish causal mechanisms.</p>
     </section>
 
-    <section class="section results" id="results" aria-labelledby="results-title">
-      <p class="eyebrow">CROSS-MODEL VERBALIZATION</p><h2 id="results-title">Cross-Model Results</h2>
-      <p class="section-intro">Qwen3-4B-Instruct-2507 serves as the decoder for Llama, Gemma, and Yi donor models.</p>
-      <div class="highlights">
-        <div><strong>4B</strong><span>Shared decoder</span><small>Qwen3-4B-Instruct-2507</small></div>
-        <div><strong>4B–34B</strong><span>Cross-model donor sizes</span><small>Configurations evaluated in Table 3</small></div>
-        <div><strong>3</strong><span>Activation readout tasks</span><small>Classification, fact retrieval, and gist summarization</small></div>
+    <section class="sheet" aria-labelledby="results-title">
+      <h2 id="results-title">Results</h2>
+      <div class="body-copy">
+        <p>Table 2 compares UAV with trained self-explanation baselines using overall ROUGE-L and BERTScore. On the Qwen3-4B donor, UAV exceeds Activation Oracle and LatentQA on both metrics. On the Llama-3.1-8B donor, UAV is competitive with LatentQA on ROUGE-L and higher on BERTScore.</p>
+        <figure class="result-figure quantitative">
+          <div class="table-scroll" role="region" aria-label="UAV and baseline numeric comparison; scroll horizontally on smaller screens" tabindex="0">
+            <table><thead><tr><th scope="col">Donor</th><th scope="col">Method</th><th scope="col">Decoder</th><th scope="col">ROUGE-L ↑</th><th scope="col">BERTScore ↑</th></tr></thead><tbody>
+              <tr><th scope="row">Qwen3-4B</th><td>Activation Oracle</td><td>Qwen3-4B</td><td>0.198</td><td>0.234</td></tr>
+              <tr><th scope="row">Qwen3-4B</th><td>LatentQA</td><td>Qwen3-4B</td><td>0.235</td><td>0.327</td></tr>
+              <tr class="ours"><th scope="row">Qwen3-4B</th><td>UAV · Full</td><td>Qwen3-4B</td><td>0.254</td><td>0.344</td></tr>
+              <tr class="ours"><th scope="row">Qwen3-4B</th><td>UAV · Adapter-only transfer</td><td>Qwen3-4B</td><td>0.260</td><td>0.347</td></tr>
+              <tr><th scope="row">Llama-3.1-8B</th><td>Activation Oracle</td><td>Llama-8B</td><td>0.273</td><td>0.362</td></tr>
+              <tr><th scope="row">Llama-3.1-8B</th><td>LatentQA</td><td>Llama-8B</td><td>0.285</td><td>0.370</td></tr>
+              <tr class="ours"><th scope="row">Llama-3.1-8B</th><td>UAV · Full, self-decoding</td><td>Llama-8B</td><td>0.286</td><td>0.379</td></tr>
+              <tr class="ours"><th scope="row">Llama-3.1-8B</th><td>UAV · Full, cross-decoding</td><td>Qwen3-4B</td><td>0.274</td><td>0.369</td></tr>
+            </tbody></table>
+          </div>
+          <figcaption>Table 2. Overall generation scores from the paper; higher is better. “Full” denotes two-stage adaptation, while adapter-only transfer reuses frozen decoder-side LoRA from another donor.</figcaption>
+        </figure>
+        <h3>Qualitative Example</h3>
+        <p>In a fact-retrieval example from Table 19, UAV correctly recovers the name of the group from which Westfield Corporation was spun off. The decoder receives the question and activation-derived tokens rather than the source excerpt.</p>
+        <figure class="result-figure qualitative">
+          <div class="case-grid">
+            <div class="case"><h4>Source and reference</h4><p class="case-label">Source excerpt</p><p>Westfield Corporation was founded with the spin-off of the Westfield Group in 2014…</p><p class="case-label">Question</p><p>What was the name of the group this entity split from?</p><p class="activation">Reference: <strong>Westfield Group</strong></p></div>
+            <div class="case"><h4>UAV</h4><p class="case-label">Model input</p><p>Question and activation-derived tokens; the source text is withheld.</p><p class="case-label">Predicted answer</p><p>Westfield Group</p><p class="activation">ROUGE-L: <strong>1.000</strong></p></div>
+          </div>
+          <figcaption>Table 19. One fact-retrieval example with an exact-match answer. A selected example does not represent average performance.</figcaption>
+        </figure>
       </div>
-      <div class="table-heading"><h3>Cross-donor results</h3><span>Table 3</span></div>
-      <div class="table-scroll" tabindex="0" role="region" aria-label="Cross-donor results; scroll horizontally on smaller screens"><table><caption class="sr-only">Cross-donor results from Table 3 using Qwen3-4B-Instruct-2507 as the shared decoder.</caption><thead><tr><th scope="col">Donor model</th><th scope="col">Validation loss ↓</th><th scope="col">ROUGE-L ↑</th><th scope="col">BERTScore ↑</th></tr></thead><tbody>
-        <tr><th scope="row">Llama-3.1-8B-Instruct</th><td>1.6388</td><td>0.274</td><td>0.369</td></tr>
-        <tr><th scope="row">Gemma-3-4B-IT</th><td>1.6790</td><td>0.266</td><td>0.354</td></tr>
-        <tr><th scope="row">Gemma-3-12B-IT</th><td>1.6589</td><td>0.269</td><td>0.355</td></tr>
-        <tr><th scope="row">Yi-1.5-34B-Chat</th><td>1.5837</td><td>0.299</td><td>0.377</td></tr>
-      </tbody></table></div>
-      <p class="table-note">Mean generation scores are shown; per-example standard deviations are reported in the paper. Donor size alone does not determine how readily its activations can be verbalized.</p>
-
-      <div class="table-heading secondary-heading"><h3>Comparison with trained self-explanation baselines</h3><span>Table 2 · Overall scores</span></div>
-      <div class="table-scroll" tabindex="0" role="region" aria-label="Overall baseline comparison; scroll horizontally on smaller screens"><table><caption class="sr-only">Selected training-based methods from Table 2, with overall ROUGE-L and BERTScore.</caption><thead><tr><th scope="col">Method / adaptation</th><th scope="col">Decoder</th><th scope="col">ROUGE-L ↑</th><th scope="col">BERTScore ↑</th></tr></thead>
-      <tbody><tr class="group"><th colspan="4" scope="rowgroup">Donor: Qwen3-4B-Instruct-2507</th></tr>
-        <tr><th scope="row">Activation Oracle</th><td>Qwen3-4B</td><td>0.198</td><td>0.234</td></tr>
-        <tr><th scope="row">LatentQA</th><td>Qwen3-4B</td><td>0.235</td><td>0.327</td></tr>
-        <tr class="ours"><th scope="row">UAV · Full</th><td>Qwen3-4B</td><td>0.254</td><td>0.344</td></tr>
-        <tr class="ours"><th scope="row">UAV · AOT from Llama</th><td>Qwen3-4B</td><td>0.260</td><td>0.347</td></tr>
-      </tbody><tbody><tr class="group"><th colspan="4" scope="rowgroup">Donor: Llama-3.1-8B-Instruct</th></tr>
-        <tr><th scope="row">Activation Oracle</th><td>Llama-8B</td><td>0.273</td><td>0.362</td></tr>
-        <tr><th scope="row">LatentQA</th><td>Llama-8B</td><td>0.285</td><td>0.370</td></tr>
-        <tr class="ours"><th scope="row">UAV · Full, self-decoding</th><td>Llama-8B</td><td>0.286</td><td>0.379</td></tr>
-        <tr class="ours"><th scope="row">UAV · Full, cross-decoding</th><td>Qwen3-4B</td><td>0.274</td><td>0.369</td></tr>
-        <tr class="ours"><th scope="row">UAV · AOT from Qwen</th><td>Qwen3-4B</td><td>0.257</td><td>0.346</td></tr>
-      </tbody></table></div>
-      <p class="table-note"><strong>Full:</strong> two-stage adaptation on the current donor–decoder pair. <strong>AOT:</strong> adapter-only transfer with a frozen decoder-side LoRA learned from the named source donor. The paper includes task-level results, training-free baselines, standard deviations, and paired-bootstrap comparisons.</p>
     </section>
 
-    <section class="section efficiency" aria-labelledby="efficiency-title">
-      <p class="eyebrow">TRAINING WITH CACHED ACTIVATIONS</p><h2 id="efficiency-title">Training Efficiency</h2>
-      <p class="section-intro">Caching donor activations allows verbalizer training without keeping the donor model in GPU memory.</p>
-      <div class="table-scroll" tabindex="0" role="region" aria-label="Training efficiency comparison"><table><caption class="sr-only">Training cost per epoch from Appendix D.1 and Table 12.</caption><thead><tr><th scope="col">Configuration</th><th scope="col">Stage 1 GPU-hours ↓</th><th scope="col">Stage 2 GPU-hours ↓</th><th scope="col">Validation loss ↓</th></tr></thead><tbody>
-        <tr><th scope="row">12B self-decoding</th><td>7.1</td><td>26.5</td><td>1.6004</td></tr>
-        <tr class="ours"><th scope="row">4B UAV cross-decoding</th><td>2.7</td><td>11.6</td><td>1.6594</td></tr>
-      </tbody></table></div>
-      <p class="table-note">Appendix D.1, measured per epoch under the same setup. Lower training cost comes with a validation-loss increase of 0.059 in this comparison.</p>
-    </section>
-
-    <section class="section examples" aria-labelledby="examples-title">
-      <p class="eyebrow">ACTIVATIONS IN NATURAL LANGUAGE</p><h2 id="examples-title">Qualitative Examples</h2>
-      <p class="section-intro">Selected fact-retrieval examples from Table 19. Source excerpts are shown for context; the verbalizer receives the question and activation-derived tokens.</p>
-      <div class="case-grid">
-        <article class="case improved"><div class="case-top"><h3>Successful factual readout</h3><span>ROUGE-L 1.000</span></div><p class="small-label">SOURCE EXCERPT</p><p class="sample">Westfield Corporation was founded with the spin-off of the Westfield Group in 2014…</p><p class="small-label">QUESTION</p><blockquote>What was the name of the group this entity split from?</blockquote><div class="answer"><span>Reference</span><strong>Westfield Group</strong></div><div class="answer"><span>UAV</span><strong>Westfield Group</strong></div></article>
-        <article class="case baseline"><div class="case-top"><h3>A factual failure</h3><span>ROUGE-L 0.333</span></div><p class="small-label">SOURCE EXCERPT</p><p class="sample">…an old place name for a part of Nishinari-ku in Osaka, Japan.</p><p class="small-label">QUESTION</p><blockquote>What part of Osaka is this place located in?</blockquote><div class="answer"><span>Reference</span><strong>Nishinari-ku</strong></div><div class="answer"><span>UAV</span><strong>the Kita-ku district</strong></div></article>
-      </div><p class="table-note">A plausible answer can still contain the wrong fact. These examples illustrate both recoverable information and the limits of activation verbalization.</p>
-    </section>
-
-    <section class="section citation" id="citation" aria-labelledby="citation-title"><div class="citation-heading"><div><p class="eyebrow">REFERENCE</p><h2 id="citation-title">Citation</h2></div><button class="copy-button" id="copy-citation" type="button">Copy BibTeX</button></div>
-      <pre><code id="bibtex">@inproceedings{zhao2026universal,
-  title     = {Universal Activation Verbalizer: A Unified Framework
-               for Cross-Model Activation Explanation},
-  author    = {Zhao, Haiyan and He, Zirui and Wang, Guanchu and
-               Payani, Ali and Li, Yingcong and Du, Mengnan},
-  booktitle = {Proceedings of the 2026 Conference on Empirical Methods
-               in Natural Language Processing},
+    <section class="sheet bib-sheet" aria-labelledby="bibtex-title">
+      <h2 id="bibtex-title">BibTeX</h2>
+      <pre><code>@inproceedings{zhao2026universal,
+  title     = {Universal Activation Verbalizer: A Unified Framework for Cross-Model Activation Explanation},
+  author    = {Zhao, Haiyan and He, Zirui and Wang, Guanchu and Payani, Ali and Li, Yingcong and Du, Mengnan},
+  booktitle = {Proceedings of the 2026 Conference on Empirical Methods in Natural Language Processing},
   year      = {2026},
   url       = {https://arxiv.org/abs/2605.25903}
-}</code></pre><p id="copy-status" class="copy-status" role="status" aria-live="polite"></p>
+}</code></pre>
     </section>
   </main>
-  <footer><span>Universal Activation Verbalizer · EMNLP 2026</span><a href="mailto:mengnandu@cuhk.edu.cn">Contact</a><a href="https://github.com/hy-zhao23/ActExp">Code ↗</a></footer>
 </body>
 </html>
