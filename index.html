@@ -90,12 +90,6 @@
       <p class="table-note"><strong>Full:</strong> two-stage adaptation on the current donor–decoder pair. <strong>AOT:</strong> adapter-only transfer with a frozen decoder-side LoRA learned from the named source donor. The paper includes task-level results, training-free baselines, standard deviations, and paired-bootstrap comparisons.</p>
     </section>
 
-    <section class="section ablation-section" aria-labelledby="ablation-title">
-      <p class="eyebrow">WHAT EACH COMPONENT CONTRIBUTES</p><h2 id="ablation-title">Component Ablation</h2>
-      <p class="section-intro">Decoder-side LoRA improves task behavior. Recovering input-specific facts and meaning also depends on the trained activation adapter.</p>
-      <figure class="framework"><a href="assets/ablation.webp" aria-label="View the full-size adapter and LoRA ablation"><img src="assets/ablation.webp" width="1812" height="412" loading="lazy" alt="Figure 3 compares Token F1, ROUGE-L, and BERTScore across six ablation variants. Full UAV improves fact and gist readout over decoder-side LoRA alone."></a><figcaption><strong>Component ablation (Figure 3).</strong> Fine-tuned LoRA alone achieves a fact-retrieval BERTScore of 0.196; full UAV reaches 0.402. These are ablation-specific values, separate from the main comparison settings.</figcaption></figure>
-    </section>
-
     <section class="section efficiency" aria-labelledby="efficiency-title">
       <p class="eyebrow">TRAINING WITH CACHED ACTIVATIONS</p><h2 id="efficiency-title">Training Efficiency</h2>
       <p class="section-intro">Caching donor activations allows verbalizer training without keeping the donor model in GPU memory.</p>
